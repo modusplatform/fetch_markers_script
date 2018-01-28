@@ -2,7 +2,7 @@ var _ = require('lodash');
 var axios = require('axios');
 const admin = require('firebase-admin');
 
-var serviceAccount = require("./modus-dev-us-firebase-adminsdk-l4fhp-2221dc505c.json");
+var serviceAccount = require("./modus-adminsdk.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -10,7 +10,7 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-require('dotenv').config()
+require('dotenv').config();
 
 const PHILADELPHIA_COUNTIES = [
 "Bucks",
@@ -45,10 +45,10 @@ _.forEach(PHILADELPHIA_COUNTIES, function(county) {
         marker.dedicatedmonth = marker.dedicatedmonth !== undefined ? marker.dedicatedmonth : '1';
         previousMarker = {
           historicalmarkerid: marker.historicalmarkerid,
-          categories: [marker.category || 'none'],
+          categories: [marker.category || ''],
           dedicatedDate: new Date(marker.dedicatedyear, marker.dedicatedmonth, marker.dedicateddate),
-          latitude: marker.latitude || 'unknown',
-          longitude: marker.longitude || 'unknown',
+          latitude: marker.latitude || '',
+          longitude: marker.longitude || '',
           location: marker.location,
           markertext: marker.markertext,
           markertype: marker.markertype,
